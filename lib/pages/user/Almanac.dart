@@ -126,9 +126,10 @@ class Almanac extends StatelessWidget {
        ),
 
       appBar: AppBar(
-        backgroundColor:Colors.white,
+        backgroundColor:Theme.of(context).colorScheme.background,
 
         leading: IconButton(
+          color: Theme.of(context).colorScheme.primary,
           icon: const Icon(Icons.arrow_back),
           onPressed:()=>{
            Navigator.push(
@@ -146,10 +147,10 @@ class Almanac extends StatelessWidget {
       borderRadius: BorderRadius.circular(50.0), // Set border radius
     ),
        
-        title:const Text(
+        title: Text(
           'Finacial Almanac 2024',
           style: TextStyle(
-           color: Colors.black,
+           color: Theme.of(context).colorScheme.primary,
            fontWeight: FontWeight.bold,
            fontSize: 18,
           ),
@@ -279,8 +280,9 @@ class Almanac extends StatelessWidget {
                                          child:SvgPicture.asset(item)
                                        ),
                                      ),
+                                     SizedBox(height: 5,),
                                      Text(title[index],
-                                      style: TextStyle(fontSize: 12,),
+                                      style: TextStyle(fontSize: 12,color: Theme.of(context).colorScheme.primary),
                                       textAlign: TextAlign.center,
                                      maxLines: 2,
                     overflow: TextOverflow.ellipsis,)

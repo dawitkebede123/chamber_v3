@@ -90,14 +90,14 @@ class _CompanyDescriptionState extends State<CompanyDescription> {
     // String sector = widget.detail["sector"].toString();
     String  name =widget.detail['Account Name'].toString();
     String logo = widget.detail["logo"].toString();
-    String  profile = '';
+    // String  profile = '';
     String image = widget.detail["Image"].toString();
     // print('test');
     // print(image);
     String video = widget.detail["Video"].toString();
     String tel = widget.detail["Tel"].toString();
     String email = widget.detail["E-mail"].toString();
-    
+    String profile = widget.detail["Profile"].toString();
     final website = widget.detail["Web"];
     final sector = widget.detail["Sector"];
     final sub_sector = widget.detail["Sub-Sector"];
@@ -252,11 +252,15 @@ class _CompanyDescriptionState extends State<CompanyDescription> {
         ), 
         
         
-        Text("Sub Sector: $sub_sector",textAlign: TextAlign.start,),
+        Row(
+          children: [
+            Text("Sub Sector: $sub_sector",textAlign: TextAlign.start,),
+          ],
+        ),
           ],
         ),
         ),
-       
+       SizedBox(height: 20,),
         if(profile !='')
          Container(
                     width: 200,

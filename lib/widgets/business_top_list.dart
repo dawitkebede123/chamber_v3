@@ -16,6 +16,8 @@ class Business_Top_List extends StatefulWidget {
 
 class _Business_Top_ListState extends State<Business_Top_List> {
   List<dynamic> filteredBusinesses = [];
+  List<Map<dynamic, dynamic>> uniqueBusinesses = [];
+   List<dynamic> data = [];
   bool isLoading = false;
   String errorMessage = '';
 
@@ -35,35 +37,145 @@ class _Business_Top_ListState extends State<Business_Top_List> {
       // Replace with your actual data fetching logic (using Firebase or other source)
       final ref = FirebaseDatabase.instance.ref('Query8').once();
       final snapshot = await ref;
-      final data = snapshot.snapshot.value as List<dynamic>;
-
+       data = snapshot.snapshot.value as List<dynamic>;
+       data = data.where((element) => element["Is_adv"]=="True").toList();
       // Define a map for filtering logic by index
-      final filters = {
-        0: (element) => element['Sector']?.toString().toLowerCase() ?? ''
-            .startsWith("export"),
-        1: (element) => element['sector']?.toString().toLowerCase() ?? ''
-            .startsWith("import"),
-        2: (element) => element['sector']?.toString().toLowerCase() ?? ''
-            .startsWith("manufacturing"),
-        // ... Add logic for other indexes
-        13: (element) => element['sector']?.toString().toLowerCase() ?? ''
-            .startsWith("real estate"),
-      };
+      filteredBusinesses = data;
 
-      // Apply filter based on widget.index
-      filteredBusinesses = data.expand((element) {
-        final filterFunction = filters[widget.index];
-        if (filterFunction != null) {
-          // ignore: unnecessary_type_check
-          return filteredBusinesses is Iterable
-              ? filteredBusinesses
-              : [filteredBusinesses]; // Wrap if not Iterable
-        } else {
-          print('empty');
-          return []; // Handle case where filter returns null
-        }
-      }).toList();
+      print(widget.index);
+      if(widget.index == 0){
+     filteredBusinesses = data
+     .expand((element) {
+    // ... filtering logic using entry.value as Map<String, dynamic>
+    final companyName = element['Sector']?.toString().toLowerCase() ?? '';
+    return companyName.startsWith("export") ? [element] : [];
+  })
+  .toList();
+  // print(filteredBusinesses);
 
+  }
+  if(widget.index == 5){
+     filteredBusinesses = data.expand((element) {
+    // ... filtering logic using entry.value as Map<String, dynamic>
+    final companyName = element['Sector']?.toString().toLowerCase() ?? '';
+    return companyName.startsWith("agriculture") ? [element] : [];
+  }).toList();
+
+  }
+  if(widget.index == 2){
+     filteredBusinesses = data.expand((element) {
+    // ... filtering logic using entry.value as Map<String, dynamic>
+    final companyName = element['Sector']?.toString().toLowerCase() ?? '';
+    return companyName.startsWith("manufacturing") ? [element] : [];
+  }).toList();
+
+  }
+  if(widget.index == 3){
+     filteredBusinesses = data.expand((element) {
+    // ... filtering logic using entry.value as Map<String, dynamic>
+    final companyName = element['Sector']?.toString().toLowerCase() ?? '';
+    return companyName.startsWith("construction") ? [element] : [];
+  }).toList();
+
+  }
+  if(widget.index == 4){
+     filteredBusinesses = data.expand((element) {
+    // ... filtering logic using entry.value as Map<String, dynamic>
+    final companyName = element['Sector']?.toString().toLowerCase() ?? '';
+    return companyName.startsWith("transport") ? [element] : [];
+  }).toList();
+
+  }
+  if(widget.index == 1){
+     filteredBusinesses = data.expand((element) {
+    // ... filtering logic using entry.value as Map<String, dynamic>
+    final companyName = element['Sector']?.toString().toLowerCase() ?? '';
+    return companyName.startsWith("import") ? [element] : [];
+  }).toList();
+
+  }
+  if(widget.index == 6){
+     filteredBusinesses = data.expand((element) {
+    // ... filtering logic using entry.value as Map<String, dynamic>
+    final companyName = element['Sector']?.toString().toLowerCase() ?? '';
+    return companyName.startsWith("financial inter") ? [element] : [];
+  }).toList();
+
+  }
+  if(widget.index == 7){
+     filteredBusinesses = data.expand((element) {
+    // ... filtering logic using entry.value as Map<String, dynamic>
+    final companyName = element['Sector']?.toString().toLowerCase() ?? '';
+    return companyName.startsWith("community") ? [element] : [];
+  }).toList();
+
+  }
+  if(widget.index == 8){
+     filteredBusinesses = data.expand((element) {
+    // ... filtering logic using entry.value as Map<String, dynamic>
+    final companyName = element['Sector']?.toString().toLowerCase() ?? '';
+    return companyName.startsWith("electric") ? [element] : [];
+  }).toList();
+
+  }
+  if(widget.index == 9){
+     filteredBusinesses = data.expand((element) {
+    // ... filtering logic using entry.value as Map<String, dynamic>
+    final companyName = element['Sector']?.toString().toLowerCase() ?? '';
+    return companyName.startsWith("hotel") ? [element] : [];
+  }).toList();
+
+  }
+  if(widget.index == 10){
+     filteredBusinesses = data.expand((element) {
+    // ... filtering logic using entry.value as Map<String, dynamic>
+    final companyName = element['Sector']?.toString().toLowerCase() ?? '';
+    return companyName.startsWith("wholesale") ? [element] : [];
+  }).toList();
+
+  }
+  if(widget.index == 11){
+     filteredBusinesses = data.expand((element) {
+    // ... filtering logic using entry.value as Map<String, dynamic>
+    final companyName = element['Sector']?.toString().toLowerCase() ?? '';
+    return companyName.startsWith("maintennance") ? [element] : [];
+  }).toList();
+
+  }
+  if(widget.index == 12){
+     filteredBusinesses = data.expand((element) {
+    // ... filtering logic using entry.value as Map<String, dynamic>
+    final companyName = element['Sector']?.toString().toLowerCase() ?? '';
+    return companyName.startsWith("mining") ? [element] : [];
+  }).toList();
+
+  }
+  if(widget.index == 13){
+     filteredBusinesses = data.expand((element) {
+    // ... filtering logic using entry.value as Map<String, dynamic>
+    final companyName = element['Sector']?.toString().toLowerCase() ?? '';
+  
+    return companyName.startsWith("real estate") ? [element] : [];
+  }).toList();
+
+  }
+
+
+   //avoiding duplicated adv from the list based on Account Name column
+    // Set<dynamic> uniqueBusinesses = filteredBusinesses.toSet();
+  //  filteredBusinesses = uniqueBusinesses.toList();
+
+Set<String> seenKeys = {}; // Set to store unique combinations of relevant keys
+
+for (final element in filteredBusinesses) {
+  // Define the key(s) to compare for uniqueness (e.g., "name" and "age")
+  final keyCombination = "${element["Account Name"]}"; 
+
+  if (!seenKeys.contains(keyCombination)) {
+    seenKeys.add(keyCombination);
+    uniqueBusinesses.add(element);
+  }
+}
       setState(() {
         isLoading = false;
       });
@@ -104,12 +216,12 @@ class _Business_Top_ListState extends State<Business_Top_List> {
 
   Widget _buildListView() {
     return SizedBox(
-      height: 200,
+      height: 300,
       child: ListView.builder(
-        itemCount: filteredBusinesses.length,
+        itemCount: uniqueBusinesses.length,
         itemBuilder: (context, index) {
-          final businessData = filteredBusinesses[index];
-          final String icon = businessData["logo"].toString();
+          final Map<dynamic, dynamic> businessData = uniqueBusinesses[index];
+          final String icon = businessData['logo'].toString();
           Future<String> imageUrlFuture = storeImageInFirebase(icon);
           final String name = businessData["Account Name"].toString();
       
@@ -173,7 +285,7 @@ class _Business_Top_ListState extends State<Business_Top_List> {
   Future<String> storeImageInFirebase(String fileName) async {
     try {
       final storage = FirebaseStorage.instance.ref();
-      final images = storage.child('media');
+      final images = storage.child('logo');
       final imageRef = images.child(fileName);
 
       final networkImageUrl = await imageRef.getDownloadURL();

@@ -9,12 +9,15 @@ class SearchFieldMoreIcon extends StatelessWidget {
     return IconButton(
               icon: Icon(Icons.more_vert),
               onPressed: (){
-               const Column(
-          children: [
-          Checkbox(value: false, onChanged: onChanged),
-          Checkbox(value: false, onChanged: onChanged)
-            ]
-          );
+                print('filter');
+              // return Container(
+              //    child: const Column(
+              //              children: [
+              //              Checkbox(value: false, onChanged: onChanged),
+              //              Checkbox(value: false, onChanged: onChanged)
+              //                ]
+              //              ),
+              //  );
 
               },
               );

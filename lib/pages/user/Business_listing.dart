@@ -92,7 +92,7 @@ class _Business_listingState extends State<Business_listing> {
 
       appBar: AppBar(
         // Padding: const EdgeInsets.only(left: 20.0, top: 15.0, right: 10.0, bottom: 5.0),
-        backgroundColor:Color.fromARGB(255, 255, 255, 255),
+        backgroundColor:Theme.of(context).colorScheme.background,
       
          leading: Row(
            children: [

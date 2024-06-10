@@ -9,6 +9,7 @@ import 'package:chamber_of_commerce/pages/user/Almanac.dart';
 import 'package:chamber_of_commerce/pages/user/Business.dart';
 import 'package:chamber_of_commerce/pages/user/Business_listing.dart';
 import 'package:chamber_of_commerce/pages/user/Home.dart';
+import 'package:chamber_of_commerce/theme/theme.dart';
 import 'package:chamber_of_commerce/widgets/BottomNavBar.dart';
 import 'package:chamber_of_commerce/widgets/GridScreen.dart';
 import 'package:chamber_of_commerce/widgets/SearchMoreIcon.dart';
@@ -26,7 +27,10 @@ main() async {
   runApp( MaterialApp(
     
     debugShowCheckedModeBanner: false,
-    theme: ThemeData(fontFamily: 'Poppins'),
+    // theme: ThemeData(fontFamily: 'Poppins'),
+    // themeMode: lightMode,
+    theme: lightMode,
+    darkTheme: darkMode,
     // home: MyHomePage(),
     // home:Business()
     // home:Almanac()

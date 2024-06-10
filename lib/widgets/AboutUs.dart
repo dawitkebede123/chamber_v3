@@ -50,9 +50,10 @@ class About extends StatelessWidget {
          child: Text("FAQ"),
          ),
       appBar: AppBar(
-        backgroundColor:Colors.white,
+        backgroundColor:Theme.of(context).colorScheme.background,
         
          leading: IconButton(
+          color: Theme.of(context).colorScheme.primary,
           icon: Icon(Icons.arrow_back),
           onPressed:()=>{
           Navigator.push(
@@ -69,10 +70,10 @@ class About extends StatelessWidget {
       borderRadius: BorderRadius.circular(30.0), // Set border radius
     ),
        
-        title:const Text(
+        title: Text(
           'Addis Chamber',
           style: TextStyle(
-           color: Colors.black,
+           color: Theme.of(context).colorScheme.primary,
            fontWeight: FontWeight.bold,
            fontSize: 18,
           ),
@@ -101,7 +102,7 @@ class About extends StatelessWidget {
               child: SvgPicture.asset('assets/images/chamber_logo_about_page.svg')
            ),
           
-            Text(textAlign: TextAlign.justify, "Established in 1947, AACCSA is a voluntary, non-governmental, business membership organization with more than 17,000 member companies. The chamber serves as a credible voice of business and advocates for the creation of a conducive business environment. It also promotes trade and industry, disseminating business information, consulting government and members on economic development and business issues, establishing friendly relationship with similar chambers in other countries, and exchanging information as well as engaging in arbitration in times of disputes among businesses."),
+            Text(style: TextStyle(color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.justify, "Established in 1947, AACCSA is a voluntary, non-governmental, business membership organization with more than 17,000 member companies. The chamber serves as a credible voice of business and advocates for the creation of a conducive business environment. It also promotes trade and industry, disseminating business information, consulting government and members on economic development and business issues, establishing friendly relationship with similar chambers in other countries, and exchanging information as well as engaging in arbitration in times of disputes among businesses."),
              TextButton(onPressed: ()=>{
           Navigator.push(
                 context,

@@ -214,7 +214,7 @@ class _BusinessState extends State<Business> {
          backgroundColor: Color.fromARGB(255, 255, 241, 209),
            child: Padding(
              padding: const EdgeInsets.all(10.0),
-             child: const Text("Usefull Address"),
+             child:  Text("Usefull Address",style: TextStyle(color: Theme.of(context).colorScheme.primary),),
            ),
                ),
        ),
@@ -234,9 +234,10 @@ class _BusinessState extends State<Business> {
      appBar: 
      
      AppBar(
-        backgroundColor:Colors.white,
+        backgroundColor:Theme.of(context).colorScheme.background,
 
         leading: IconButton(
+          color: Theme.of(context).colorScheme.primary,
           icon: const Icon(Icons.arrow_back),
           onPressed:()=>{
            Navigator.push(
@@ -252,10 +253,10 @@ class _BusinessState extends State<Business> {
       borderRadius: BorderRadius.circular(50.0), // Set border radius
     ),
        
-        title:const Text(
+        title:Text(
           'Business Directory 2024',
           style: TextStyle(
-           color: Colors.black,
+           color: Theme.of(context).colorScheme.primary,
            fontWeight: FontWeight.bold,
            fontSize: 18,
           ),
@@ -365,7 +366,7 @@ class _BusinessState extends State<Business> {
                                      ),
                                    ),
                                    Text(_filteredItems[index],
-                                    style: TextStyle(fontSize: 12,),
+                                    style: TextStyle(fontSize: 12,color:Theme.of(context).colorScheme.primary),
                                     textAlign: TextAlign.center,
                                    maxLines: 2,
                   overflow: TextOverflow.ellipsis,)

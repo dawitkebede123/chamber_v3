@@ -57,18 +57,9 @@ class _HomeState extends State<Home> {
     // final AssetImage backgroundImage = AssetImage('assets/images/logo.jpg');
    
     var scaffold = Scaffold(
-        drawer: Drawer(
-        width: MediaQuery.of(context).size.width * 1,
-         backgroundColor: Colors.white,
-         child: About(),
-      //     child: ListView(
-      //      padding: EdgeInsets.zero, // Remove default padding
-      //      children: [
-      //     // Add any drawer header content here (optional)
-      //        const TwoButtonWidget(), // Use the widget directly
-      //   ],
-      // ),
-       ),
+      backgroundColor: Theme.of(context).colorScheme.background,
+    
+       
       
        
 
@@ -77,11 +68,21 @@ class _HomeState extends State<Home> {
 
 
       appBar: AppBar(
-        backgroundColor:const Color(0XD6D6D6),
-        title:const Text(
+        backgroundColor:Theme.of(context).colorScheme.background,
+          leading: IconButton(
+          icon: Icon(Icons.menu, color:Theme.of(context).colorScheme.primary), // Set icon color
+          onPressed: () => Navigator.push(
+              context,
+              TransparentRoute(
+               
+                page:  About(),
+              ),
+            ),
+        ),
+        title: Text(
           'Addis Chamber Directory',
           style: TextStyle(
-           color: Colors.black,
+           color: Theme.of(context).colorScheme.primary,
            fontWeight: FontWeight.bold,
            fontSize: 18,
           ),
@@ -89,6 +90,7 @@ class _HomeState extends State<Home> {
 
         actions: [
           IconButton(
+            color: Theme.of(context).colorScheme.primary,
         icon: const Icon(Icons.notifications),
         onPressed: () {
           Navigator.push(
@@ -157,18 +159,20 @@ class _HomeState extends State<Home> {
         showModalDialog(context);
         },
         child: Padding(
-          padding: const EdgeInsets.only(left: 20,right: 20,top: 16,bottom: 0),
+          padding: const EdgeInsets.only(left: 20,right: 20,top: 16,bottom: 16),
           child: Container(
+           
             height:170 ,
-            decoration: BoxDecoration(
+            decoration:  BoxDecoration(
+               color: Theme.of(context).colorScheme.primary,
     image: DecorationImage(
       image: AssetImage('assets/images/adv.png'),
       fit: BoxFit.cover,
     ),
   ),
               child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 140.0,top: 16),
+                child: const Padding(
+                  padding: EdgeInsets.only(left: 140.0,top: 16),
                   child: Text("Click Here \n", style: TextStyle(fontSize: 16,color:Colors.red,fontWeight: FontWeight.w600),),
                 ),),
             // child: Center(child: Container(

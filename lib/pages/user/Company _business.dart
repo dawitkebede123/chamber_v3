@@ -21,7 +21,7 @@ import 'package:chamber_of_commerce/widgets/VideoPlayer.dart';
 import 'package:share_plus/share_plus.dart';
 
 class CompanyBusiness extends StatefulWidget {
-  final Map<String, String> detail;
+  final Map<dynamic, dynamic> detail;
   CompanyBusiness({super.key,required this.detail});
 
   @override

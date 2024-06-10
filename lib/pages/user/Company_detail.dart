@@ -29,6 +29,7 @@ class CompanyState extends State<CompanyDetail> {
   Widget build(BuildContext context) {
     // final accountNumber = widget.data['Account Number'];
     final name = widget.data['Account Name'];
+    // final  profile = widget.data["Profile"];
     final tel = widget.data['Tel'];
     final mobile = widget.data['Mobile Phone'];
     final email = widget.data['E-mail'];
@@ -101,6 +102,7 @@ class CompanyState extends State<CompanyDetail> {
           //   ],
           // ),
           SizedBox(height: 5,),
+        
                 if(tel !="")
                      Row(
                        children: [

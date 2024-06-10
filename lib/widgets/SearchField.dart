@@ -1,5 +1,6 @@
 import 'dart:async';
 // import 'dart:ffi';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -18,7 +19,12 @@ class SearchField extends StatefulWidget {
 class _SearchFieldState extends State<SearchField> {
   final TextEditingController _searchController = TextEditingController();
   Stream<List<dynamic>>? _searchResultsStream;
+   List<Map<dynamic, dynamic>> uniqueBusinesses = [];
+
+    int? _selectedValue = 1; // Initial selected value of filter option
+   List<dynamic> data = [];
   bool _showListView = false;
+  bool showFilter = false;
   final _history = <String>[]; // List to store search history
   final _maxHistoryLength = 10; 
   @override
@@ -34,27 +40,73 @@ class _SearchFieldState extends State<SearchField> {
       setState(() {
         _searchResultsStream = null;
         _showListView = false;
+        data = [];
+        uniqueBusinesses = [];
       });
-    } else {
-      setState(() {
+    } 
+    
+   else{
+    // almanac directory
+if(_selectedValue == 2){
+   setState(() {
+          data = [];
+        uniqueBusinesses = [];
         final searchText = _searchController.text.toUpperCase();
         _searchResultsStream = FirebaseDatabase.instance
-            .ref('Query8')
+            .ref('Almanac')
             
             .orderByChild('Account Name')
+            // .equalTo("almanac")
              .startAt(searchText)
             .endAt(searchText + '\uffff')
             // .startAt(_searchController.text.toUpperCase())
             // .endAt(_searchController.text.toLowerCase() + '\uffff')
-            .limitToFirst(1)
+            .limitToFirst(5)
             .onValue
             .asBroadcastStream()
             .map((event) => _mapSnapshotToCompanyList(event.snapshot));
         _showListView = true;
       });
     }
+    //Business directory
+    if(_selectedValue == 1) {
+      setState(() {
+          data = [];
+        uniqueBusinesses = [];
+        final searchText = _searchController.text.toUpperCase();
+        _searchResultsStream = FirebaseDatabase.instance
+            .ref('Query8')
+            
+            .orderByChild('Account Name')
+            // .equalTo("business")
+             .startAt(searchText)
+            .endAt(searchText + '\uffff')
+            // .startAt(_searchController.text.toUpperCase())
+            // .endAt(_searchController.text.toLowerCase() + '\uffff')
+            .limitToFirst(5)
+            .onValue
+            .asBroadcastStream()
+            .map((event) => _mapSnapshotToCompanyList(event.snapshot));
+        _showListView = true;
+      });
+    }
+    }
   }
-
+void _onFilterClicked(){
+  if(showFilter==false){
+ setState(() {
+    showFilter = true;
+    uniqueBusinesses = [];
+  });
+  }
+  else{
+     setState(() {
+    showFilter = false;
+     uniqueBusinesses = [];
+  });
+  }
+ 
+}
 void _updateSearchHistory(String term) async {
     _history.remove(term); // Remove duplicate entries
     _history.insert(0, term); // Add term to the beginning of the list
@@ -97,6 +149,7 @@ void _updateSearchHistory(String term) async {
   @override
   void dispose() {
     _searchController.dispose();
+    // data.dispose();
     _saveSearchHistory();
     super.dispose();
   }
@@ -105,11 +158,37 @@ void _updateSearchHistory(String term) async {
   Widget build(BuildContext context) {
     return Column(
       children: [
-         if (_history.isNotEmpty) _buildSearchHistory(),
+        //  if (_history.isNotEmpty) _buildSearchHistory(),
         
         _buildSearchTextField(),
-     
-        if (_showListView) _buildSearchResults(),
+      
+       if(showFilter)
+        Stack(
+           children: [
+             Container(
+              height: 100,
+              // child: Text('background'),
+             ),
+          
+          Positioned(
+            // Adjust positioning properties (bottom, right, etc.)
+            top: 0.0,
+            right: 0.0,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: Container(
+                height: 100.0,
+                width: 150.0,
+                // color: Colors.blue,
+                child:   _buildFilter(),
+              ),
+            ),
+          ),
+      ]),   //   if(showFilter) _buildFilter(),
+     if (_showListView)
+             _buildSearchResults(),
+        // if (_showListView) _buildSearchResults(),
+       
       ],
     );
   }
@@ -139,7 +218,7 @@ Widget _buildSearchHistory() {
         maxLines: 1,
         controller: _searchController,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.only(left: 20.0),
+          contentPadding: const EdgeInsets.only(left: 20.0,right: 20),
           filled: true,
           fillColor: Color.fromARGB(255, 229, 234, 232),
           border: OutlineInputBorder(
@@ -157,11 +236,15 @@ Widget _buildSearchHistory() {
   Widget _buildSuffixIcon() {
     return Container(
       width: 200,
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Icon(Icons.search),
-          SearchFieldMoreIcon(),
+          IconButton(icon:Icon(Icons.more_vert),
+          onPressed: (){
+            _onFilterClicked();
+          } ,),
+          
         ],
       ),
     );
@@ -177,10 +260,23 @@ Widget _buildSearchHistory() {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
         }
-          print(snapshot.data);
+          // print(snapshot.data);
+          data = snapshot.data?? [];
+          Set<String> seenKeys = {}; // Set to store unique combinations of relevant keys
+
+for (final element in data) {
+  // Define the key(s) to compare for uniqueness (e.g., "name" and "age")
+  final keyCombination = "${element["Account Name"]}"; 
+
+  if (!seenKeys.contains(keyCombination)) {
+    seenKeys.add(keyCombination);
+    uniqueBusinesses.add(element);
+  }
+}
         return Container(
           height: 200.0,
-          child: _buildListView(snapshot.data ?? []),
+          // width: 200,
+          child: _buildListView(uniqueBusinesses),
         );
       },
     );
@@ -209,4 +305,51 @@ Widget _buildSearchHistory() {
       },
     );
   }
+
+  Widget _buildFilter(){
+     
+   
+     return Container(
+          width: 100,
+        child:  Column(children: [
+
+Column(
+  children: [
+    Row(children: [
+Radio<int>(
+      value: 1,
+      groupValue: _selectedValue,
+      onChanged: (value) => setState((){
+       _selectedValue = value;
+       uniqueBusinesses = [];
+        _searchController.clear();
+      } ),
+    ),
+    Text('Business'),
+    ],),
+    
+    Row(
+      children: [
+      Radio<int>(
+      value: 2,
+      groupValue: _selectedValue,
+      onChanged: (value) => setState((){
+       _selectedValue = value;
+       uniqueBusinesses = [];
+        _searchController.clear();
+      } ),
+    ),
+    Text('Almanac'),
+      ],
+    )    
+   
+  ],
+),
+
+
+        ],)
+     );
+  }
+
+ 
 }
