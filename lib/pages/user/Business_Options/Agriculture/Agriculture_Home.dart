@@ -158,9 +158,10 @@ title.sort((a,b)=>a.compareTo(b));
      appBar: 
      
      AppBar(
-        backgroundColor:Colors.white,
+        backgroundColor:Theme.of(context).colorScheme.background,
 
         leading: IconButton(
+          color: Theme.of(context).colorScheme.primary,
           icon: const Icon(Icons.arrow_back),
           onPressed:()=>{
            Navigator.push(
@@ -176,10 +177,10 @@ title.sort((a,b)=>a.compareTo(b));
       borderRadius: BorderRadius.circular(50.0), // Set border radius
     ),
        
-        title:const Text(
+        title: Text(
           'Agriculture',
           style: TextStyle(
-           color: Colors.black,
+           color: Theme.of(context).colorScheme.primary,
            fontWeight: FontWeight.bold,
            fontSize: 18,
           ),

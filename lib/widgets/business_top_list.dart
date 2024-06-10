@@ -38,7 +38,9 @@ class _Business_Top_ListState extends State<Business_Top_List> {
       final ref = FirebaseDatabase.instance.ref('Query8').once();
       final snapshot = await ref;
        data = snapshot.snapshot.value as List<dynamic>;
-       data = data.where((element) => element["Is_adv"]=="True").toList();
+      //  print(snapshot.snapshot.value);
+      //  print(data);
+      //  data = data.where((element) => element["Is_adv"]=="True").toList();
       // Define a map for filtering logic by index
       filteredBusinesses = data;
 
@@ -298,5 +300,4 @@ for (final element in filteredBusinesses) {
     }
   }
 }
-
 

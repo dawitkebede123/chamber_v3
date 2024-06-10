@@ -43,7 +43,7 @@ class _BusinessState extends State<Business> {
 
 
    String _query = '';
-  List <String> _items = [
+  final List <String> _items = [
       "assets/images/business_lists/5.svg",
        "assets/images/business_lists/8.svg",
         "assets/images/business_lists/11.svg",

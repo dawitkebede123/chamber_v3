@@ -94,7 +94,7 @@ class _CompanyDescriptionState extends State<CompanyDescription> {
     String image = widget.detail["Image"].toString();
     // print('test');
     // print(image);
-    String video = widget.detail["Video"].toString();
+    String video = widget.detail["Video"];
     String tel = widget.detail["Tel"].toString();
     String email = widget.detail["E-mail"].toString();
     String profile = widget.detail["Profile"].toString();
@@ -103,7 +103,7 @@ class _CompanyDescriptionState extends State<CompanyDescription> {
     final sub_sector = widget.detail["Sub-Sector"];
     // String fax = widget.detail["fax"].toString();
      Future<String> imageUrlFuture = storeImageInFirebase(image);
-     Future<String> imageUrlFutureGif = storeImageInFirebase(video);
+     Future<String> imageUrlFutureGif = storeVideoInFirebase(video);
      Future<String> logoUrlFuture = storeLogoInFirebase(logo);
     Future<String> videoUrlFuture = storeVideoInFirebase(video);
     var scaffold = Scaffold(
@@ -204,12 +204,32 @@ class _CompanyDescriptionState extends State<CompanyDescription> {
           FutureBuilder<String>(
             future: videoUrlFuture,
             builder: (context, snapshot) {
-              if (snapshot.hasData && !snapshot.data!.toLowerCase().endsWith('.gif')) {
+              if (snapshot.hasData && snapshot.data!.toLowerCase().endsWith('.gif')) {
                 // Display video
                 return VideoPlayerWidget(videoUrl: snapshot.data!);
               } else {
-                return Container(); // Placeholder for non-video content
-              }
+                return  Container(
+            //  width:MediaQuery.of(context).size.width * 0.20,
+           child: FutureBuilder<String>(
+    future: imageUrlFutureGif,
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        return Image.network(snapshot.data!); 
+        // print("test");// Use the downloaded URL
+      } else if (snapshot.hasError) {
+        return Text('Error: ${snapshot.error}'); // Handle errors
+      }
+
+      // Display a loading indicator while waiting
+      return const CircularProgressIndicator();
+    },
+  ),
+
+          );
+                
+                // VideoPlayerGif(gifUrl: snapshot.data!);
+                // Container(); // Placeholder for non-video content
+              };
             },
           ),
         ],

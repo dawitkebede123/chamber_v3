@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class VideoPlayerWidget extends StatefulWidget {
-  const VideoPlayerWidget({super.key, required this.videoUrl});
+class VideoPlayerFromNetwork extends StatefulWidget {
+  const VideoPlayerFromNetwork({super.key, required this.videoUrl});
   final String videoUrl;
 
   @override
-  State<VideoPlayerWidget> createState() => _VideoPlayerState();
+  State<VideoPlayerFromNetwork> createState() => _VideoPlayerState();
 }
 
-class _VideoPlayerState extends State<VideoPlayerWidget> {
+class _VideoPlayerState extends State<VideoPlayerFromNetwork> {
   late VideoPlayerController _controller;
   late Future<void> _initializeVideoPlayerFuture;
   bool _isPlaying = true; // Flag to track playback state
@@ -18,7 +18,7 @@ class _VideoPlayerState extends State<VideoPlayerWidget> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset(widget.videoUrl);
+    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl));
     _initializeVideoPlayerFuture = _controller.initialize().then((_) {
       setState(() {});
       

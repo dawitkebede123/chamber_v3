@@ -35,7 +35,7 @@ class _CompanyState extends State<Company> {
     String logo = widget.detail["logo"].toString();
     String  profile = widget.detail["profile"].toString();
     String image = widget.detail["adv_image"].toString();
-    String video = widget.detail["adv_video"].toString();
+    String video = widget.detail["adv_video"];
     String tel = widget.detail["tel"].toString();
     String email = widget.detail["email"].toString();
     

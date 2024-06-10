@@ -8,6 +8,7 @@ import 'package:chamber_of_commerce/pages/user/Notify.dart';
 import 'package:chamber_of_commerce/widgets/AboutUs.dart';
 import 'package:chamber_of_commerce/widgets/BottomNavBar.dart';
 import 'package:chamber_of_commerce/widgets/CustomBottomNavBar.dart';
+import 'package:chamber_of_commerce/widgets/LeftMenu.dart';
 import 'package:chamber_of_commerce/widgets/SearchField.dart';
 import 'package:chamber_of_commerce/widgets/SearchMoreIcon.dart';
 import 'package:chamber_of_commerce/widgets/drawer.dart';
@@ -75,7 +76,7 @@ class _HomeState extends State<Home> {
               context,
               TransparentRoute(
                
-                page:  About(),
+                page:  LeftMenu(),
               ),
             ),
         ),

@@ -169,9 +169,10 @@ final Name = [
        
 
       appBar: AppBar(
-        backgroundColor:Colors.white,
+        backgroundColor:Theme.of(context).colorScheme.background,
 
         leading: IconButton(
+          color: Theme.of(context).colorScheme.primary,
           icon: const Icon(Icons.arrow_back),
           onPressed:()=>{
           Navigator.push(
@@ -189,10 +190,10 @@ final Name = [
       borderRadius: BorderRadius.circular(50.0), // Set border radius
     ),
        
-        title:const Text(
+        title: Text(
           'Insurance',
           style: TextStyle(
-           color: Colors.black,
+           color: Theme.of(context).colorScheme.primary,
            fontWeight: FontWeight.bold,
            fontSize: 18,
           ),
@@ -255,7 +256,7 @@ final Name = [
                    Expanded(
                      child: Text(
                        name,
-                       style: TextStyle(fontWeight: FontWeight.bold),
+                       style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).colorScheme.primary,),
                        textAlign: TextAlign.left,
                        maxLines: 1,
                        overflow: TextOverflow.ellipsis,
