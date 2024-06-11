@@ -133,7 +133,7 @@ class _Agriculture_HomeState extends State<Agriculture_Home> {
   //      "assets/images/business_lists/5.svg",
   // ];
 
-title.sort((a,b)=>a.compareTo(b));
+  title.sort((a,b)=>a.compareTo(b));
     List <String> categories = List .generate(title.length, (index) => 
     "assets/images/business_lists/1.svg"
     );
@@ -329,7 +329,7 @@ title.sort((a,b)=>a.compareTo(b));
     
   }
  List<String> get _filteredItems => title
-      .where((item) => item.toLowerCase().contains(_query))
+      .where((item) => item.toLowerCase().startsWith(_query))
       .toList();
  Widget buildImage(String urlImage,int index)=>
           Container(

@@ -21,6 +21,8 @@ class LeftMenu extends StatefulWidget {
 }
 
 class _LeftMenuState extends State<LeftMenu> {
+    bool _isSwitched = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,10 +33,12 @@ class _LeftMenuState extends State<LeftMenu> {
           color: Theme.of(context).colorScheme.primary,
           icon: const Icon(Icons.arrow_back),
           onPressed:()=>{
-           Navigator.push(
+         Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) =>Home() ),
-
+              TransparentRoute(
+               
+                page:  Home(),
+              ),
             ),
             }
           ),
@@ -45,7 +49,7 @@ class _LeftMenuState extends State<LeftMenu> {
     ),
        
         title:Text(
-          'Addis Chamber',
+          'Menu',
           style: TextStyle(
            color: Theme.of(context).colorScheme.primary,
            fontWeight: FontWeight.bold,
@@ -62,6 +66,8 @@ class _LeftMenuState extends State<LeftMenu> {
         elevation: 0.0,//remove shadow
         centerTitle: true,
       ),
+
+      
              body:  Column(
     
       children: [
@@ -75,25 +81,28 @@ class _LeftMenuState extends State<LeftMenu> {
         //       ),
         //     },child: Text("About Chamber")),
           
-      ElevatedButton(
-  onPressed: () {
-    // Handle button press event here
-    Navigator.push(
-                context,
-                 TransparentRoute(
-               
-                  page: About()              
-                
-                // , image: "assets/sg.jpg")
-              ),
-              );
-  },
-   style: ElevatedButton.styleFrom(
-    backgroundColor: Colors.blue, // Set the background color
-    textStyle: const TextStyle(color: Colors.white), // Adjust text color for contrast
-  ),
-  child:  Text('About Chamber', style: TextStyle(color:Theme.of(context).colorScheme.primary),),
-),
+      Padding(
+        padding: const EdgeInsets.only(left: 50.0),
+        child: ElevatedButton(
+          onPressed: () {
+            // Handle button press event here
+            Navigator.push(
+                  context,
+                   TransparentRoute(
+                 
+                    page: About()              
+                  
+                  // , image: "assets/sg.jpg")
+                ),
+                );
+          },
+           style: ElevatedButton.styleFrom(
+            backgroundColor: Color.fromARGB(255, 0, 114, 63), // Set the background color
+            textStyle: const TextStyle(color: Colors.white), // Adjust text color for contrast
+          ),
+          child:  Text('About Chamber', style: TextStyle(color:Colors.white),),
+        ),
+      ),
 
 
           
@@ -107,61 +116,99 @@ class _LeftMenuState extends State<LeftMenu> {
           //     ),
           //   },child: Text("Country Profile")),
            
-                      ElevatedButton(
-
-  onPressed: () => openFile(
-    url:'https://drive.google.com/file/d/1eMkNLTld-geUWg1DkvAS2qYGhBHn6lMI/view',
-    fileName:'countryprofile.pdf',
-
-  ),
-   style: ElevatedButton.styleFrom(
-    backgroundColor: Colors.blue, // Set the background color
-    textStyle: const TextStyle(color: Colors.white), // Adjust text color for contrast
-  ),
-  child:  Text('Country Profile', style: TextStyle(color:Theme.of(context).colorScheme.primary),),
-),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 50.0),
+                        child: ElevatedButton(
+                        
+                          onPressed: ()=>{
+                            Navigator.push(
+                                        context,
+                                         TransparentRoute(
+                                       
+                                        page: const CountryProfile(),
+                                      ),
+                                      ),
+                          } ,
+                          
+                          // => openFile(
+                          //   url:'https://drive.google.com/file/d/1eMkNLTld-geUWg1DkvAS2qYGhBHn6lMI/view',
+                          //   fileName:'countryprofile.pdf',
+                        
+                          // ),
+                           style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 0, 114, 63), // Set the background color
+                            textStyle: const TextStyle(color: Colors.white), // Adjust text color for contrast
+                          ),
+                          child:  const Text('Country Profile', style: TextStyle(color:Colors.white),),
+                        ),
+                      ),
            
-           
-            TextButton(onPressed:()=>{
-            Provider.of<ThemeProvider>(context,listen: false).toggleTheme(),
-            },child: const Row(
-              children: [
-                Spacer(),
-                Icon(Icons.dark_mode),
-              ],
-            )),
+  //     Switch(
+  //      value:_isSwitched , // Boolean value representing the current state (on/off)
+  // onChanged: (value) => setState(() { _isSwitched = !_isSwitched;
+  //  Provider.of<ThemeProvider>(context,listen: false).toggleTheme();}
+  // ), // Function to update the state
+  // activeColor: Theme.of(context).colorScheme.primary, // Color for the active (on) state
+  // inactiveThumbColor: Theme.of(context).colorScheme.background, // Color for the inactive (off) thumb
+  // inactiveTrackColor: Theme.of(context).colorScheme.primary, // Color for the inactive track
+
+  //       ),  
+            // SizedBox(width: ,)   
+            
+            Padding(
+              padding: const EdgeInsets.only(left: 300.0),
+              child: TextButton(onPressed:()=>{
+              Provider.of<ThemeProvider>(context,listen: false).toggleTheme(),
+              },child: 
+                Container(
+                    decoration: BoxDecoration(
+                      color:Colors.grey,
+                      borderRadius:BorderRadius.circular(999) ,
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(Icons.dark_mode),
+                    )),
+                
+              ),
+            ),
       ],
     ),  
     // 
     );
   }
 
- Future<File?> downloadFile({required String url,String? name})async{
- final appStorage = await getApplicationDocumentsDirectory();
-      final file = File('${appStorage.path}/$name');
-
-      final response = await Dio().get(
-        url,
-        options: Options(
-          responseType: ResponseType.bytes,
-          followRedirects: false,
-          receiveTimeout: 0,
-        )
-      );
-
-
-  final raf = file.openSync(mode: FileMode.write);
-  raf.writeFromSync(response.data);
-  await raf.close();
-  return file;
-
- }
+//  Future<File?> downloadFile({required String url,String? name}) async{
+//  final appStorage = await getApplicationDocumentsDirectory();
+//       final file = File('${appStorage.path}/$name');
+//       try{
+// final response = await Dio().get(
+//         url,
+//         options: Options(
+//           responseType: ResponseType.bytes,
+//           followRedirects: false,
+//           receiveTimeout: 0,
+//         ),
+//       );
 
 
-  Future openFile({required String url,String? fileName})async{
-    final file = await downloadFile(url: url,name: fileName);
-    if(file == null) return;
-    print('Path:${file.path}');
-    OpenFile.open(file.path);
-  }
+//   final raf = file.openSync(mode: FileMode.write);
+//   raf.writeFromSync(response.data);
+//   await raf.close();
+//   return file;
+//       }
+//       catch(e){
+//         return null;
+//       }
+      
+
+//  }
+
+
+//   Future openFile({required String url,String? fileName})async{
+//     final file = await downloadFile(url: url,name: fileName);
+//     if(file == null) return;
+//     print('Path:${file.path}');
+//     OpenFile.open(file.path);
+//   }
 }

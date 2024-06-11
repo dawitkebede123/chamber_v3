@@ -88,7 +88,7 @@ class MessagePresident extends StatelessWidget {
             Text("Mesenbet Shenkute \nPresident\nAddis Ababa Chamber of Commerce and Sectoral Associations",style: TextStyle(color: Theme.of(context).colorScheme.primary,),) 
            ],),
          ),
-           bottomNavigationBar: const CustomeButtomNavBar(index: 0),
+          //  bottomNavigationBar: const CustomeButtomNavBar(index: 0),
     
       
      );

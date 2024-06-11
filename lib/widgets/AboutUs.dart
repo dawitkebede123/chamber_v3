@@ -120,10 +120,10 @@ class About extends StatelessWidget {
               );
   },
    style: ElevatedButton.styleFrom(
-    backgroundColor: Colors.blue, // Set the background color
+    backgroundColor: Color.fromARGB(255, 0, 114, 63), // Set the background color
     textStyle: const TextStyle(color: Colors.white), // Adjust text color for contrast
   ),
-  child:  Text('Message From Secretary General', style: TextStyle(color:Theme.of(context).colorScheme.primary),),
+  child:  Text('Message From Secretary General', style: TextStyle(color:Colors.white),),
 ),
  
 
@@ -140,10 +140,10 @@ class About extends StatelessWidget {
           );
   },
   style: ElevatedButton.styleFrom(
-    backgroundColor: Colors.blue, // Set the background color
+    backgroundColor: Color.fromARGB(255, 0, 114, 63), // Set the background color
     textStyle: const TextStyle(color: Colors.white), // Adjust text color for contrast
   ),
-  child: Text('Message From President', style: TextStyle(color:Theme.of(context).colorScheme.primary),),
+  child: Text('Message From President', style: TextStyle(color:Colors.white),),
 ),        
 
          

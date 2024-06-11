@@ -61,12 +61,14 @@ class _Agriculture_listingState extends State<Agriculture_listing> {
   //     // _searchTerm = searchTerm.toLowerCase();
   //   });
   // }
+  
   @override
   Widget build(BuildContext context) {
     //sample data containing company name, log(if there is no logo give a default one
     // ),
   //  
     //  final data
+   String title = widget.title;
     
      final  _items = [
      'assets/images/business_lists/sample/1.svg',
@@ -77,7 +79,6 @@ class _Agriculture_listingState extends State<Agriculture_listing> {
      'assets/images/business_lists/sample/6.svg',
     //  'assets/images/business_lists/sample/mengesha.svg',
     //  'assets/images/business_lists/sample/tomoca.svg',
-
 
    
 
@@ -157,26 +158,29 @@ class _Agriculture_listingState extends State<Agriculture_listing> {
           
                    Container(
                         // height: 48,
-          child: TextField(
-             onChanged: (value) {
-                                          setState(() {
-                                            _query = value.toLowerCase();
-                                          });},
-        maxLines: 1,
-        // controller: _searchController,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.only(left: 20.0),
-          filled: true,
-          fillColor: Color.fromARGB(255, 229, 234, 232),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50),
-            borderSide: BorderSide.none,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20,right: 20,bottom: 16),
+            child: TextField(
+               onChanged: (value) {
+                                            setState(() {
+                                              _query = value.toLowerCase();
+                                            });},
+                    maxLines: 1,
+                    // controller: _searchController,
+                    decoration: InputDecoration(
+            contentPadding: const EdgeInsets.only(left: 20.0),
+            filled: true,
+            fillColor: Color.fromARGB(255, 229, 234, 232),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(50),
+              borderSide: BorderSide.none,
+            ),
+            // contentPadding: EdgeInsets.all(1),
+            hintText: 'Search $title',
+            // suffixIcon: widget.filter? _buildSuffixIcon():null,
+                    ),
+                  ),
           ),
-          // contentPadding: EdgeInsets.all(1),
-          hintText: 'Search Business',
-          // suffixIcon: widget.filter? _buildSuffixIcon():null,
-        ),
-      ),
                         
                      
                       ),
@@ -197,12 +201,12 @@ class _Agriculture_listingState extends State<Agriculture_listing> {
                              
                              
                              
-                                                              Container(
-                                                                                                           // Set desired height or adjust with constraints
-                                                                                                             height: MediaQuery.of(context).size.height * 0.81, // Adjust height as needed
-                                                                                                           // color: Color.fromARGB(255, 142, 139, 139), // Optional background color
-                                                                                                           child: _buildContent(snapshot), // Call a separate function
-                                                                                                         ),
+                                  Container(
+                                    // Set desired height or adjust with constraints
+                                      height: MediaQuery.of(context).size.height * 0.81, // Adjust height as needed
+                                   // color: Color.fromARGB(255, 142, 139, 139), // Optional background color
+                                   child: _buildContent(snapshot), // Call a separate function
+                                 ),
                            ],
                          );
                       }, stream: _userStream,),
@@ -16730,65 +16734,6 @@ for (var i = 0; i < items.length; i++) {
 
 
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

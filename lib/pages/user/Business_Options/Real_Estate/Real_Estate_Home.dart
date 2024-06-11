@@ -427,7 +427,7 @@ class _Agriculture_HomeState extends State<Real_Estate_Home> {
     return scaffold;
   }
 List<String> get _filteredItems => title
-      .where((item) => item.toLowerCase().contains(_query))
+      .where((item) => item.toLowerCase().startsWith(_query))
       .toList();
  Widget buildImage(String urlImage,int index)=>
           Container(

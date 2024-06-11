@@ -532,7 +532,7 @@ class _BusinessState extends State<Business> {
     
   }
 List<String> get _filteredItems => title
-      .where((item) => item.toLowerCase().contains(_query))
+      .where((item) => item.toLowerCase().startsWith(_query))
       .toList();
 
  Widget buildImage(String urlImage,int index)=>

@@ -96,7 +96,7 @@ Text('Thank you for your ongoing support and confidence in your chamber.',textAl
 
            ],),
          ),
-           bottomNavigationBar: const CustomeButtomNavBar(index: 0),
+          //  bottomNavigationBar: const CustomeButtomNavBar(index: 0),
     
       
      );

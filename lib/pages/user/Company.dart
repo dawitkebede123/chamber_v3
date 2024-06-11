@@ -54,7 +54,7 @@ class _CompanyState extends State<Company> {
 
       appBar: AppBar(
 
-        backgroundColor:Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: Theme.of(context).colorScheme.background,
          leading: IconButton(
           
           icon: Icon(Icons.arrow_back),
@@ -124,8 +124,8 @@ class _CompanyState extends State<Company> {
        
         title: Text(
           sector,
-          style: TextStyle(
-           color: Colors.black,
+          style:  TextStyle(
+           color: Theme.of(context).colorScheme.primary,
            fontWeight: FontWeight.bold,
            fontSize: 18,
           ),
@@ -171,9 +171,10 @@ class _CompanyState extends State<Company> {
                                       width:MediaQuery.of(context).size.width * 0.20,
                                       ),
                            Text(name,
-              style: const TextStyle(
+              style:  TextStyle(
                     fontSize: 16, // Increase font size for heading-like appearance
-                    fontWeight: FontWeight.bold, // Make the text bold
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary // Make the text bold
                 ),)
                          ],
                        ),
@@ -208,7 +209,7 @@ class _CompanyState extends State<Company> {
 
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20,right: 20,bottom: 24),
-                      child: Container(child: Text(profile,textAlign: TextAlign.justify,style: TextStyle(fontSize: 14))),
+                      child: Container(child: Text(profile,textAlign: TextAlign.justify,style: TextStyle(fontSize: 14,color: Theme.of(context).colorScheme.primary))),
                     )),
                 
                          if(tel !="")
@@ -235,7 +236,7 @@ class _CompanyState extends State<Company> {
                                               ),
                                    child: SvgPicture.asset('assets/images/vector1.svg',width: 10,height: 10,)),
                                  SizedBox(width: 10,),
-                                 Text(tel,softWrap: true,overflow: TextOverflow.ellipsis,),
+                                 Text(tel,softWrap: true,overflow: TextOverflow.ellipsis,style: TextStyle(color: Theme.of(context).colorScheme.primary)),
                                ],
                              ),),
                            ],
@@ -267,7 +268,7 @@ class _CompanyState extends State<Company> {
                                               ),
                                child: SvgPicture.asset('assets/images/vector.svg',width: 10,height: 10,)),
                              SizedBox(width: 10,),
-                             Text(website,softWrap: true,overflow: TextOverflow.ellipsis,),
+                             Text(website,softWrap: true,overflow: TextOverflow.ellipsis,style: TextStyle(color: Theme.of(context).colorScheme.primary)),
                            ],
                          )),],),
                        ),
@@ -291,7 +292,7 @@ class _CompanyState extends State<Company> {
                                               ),
                                child: SvgPicture.asset('assets/images/vector3.svg',width: 10,height: 10,)),
                              SizedBox(width: 10,),
-                             Text(fax,softWrap: true,overflow: TextOverflow.ellipsis,),
+                             Text(fax,softWrap: true,overflow: TextOverflow.ellipsis,style: TextStyle(color: Theme.of(context).colorScheme.primary)),
                            ],
                          ),
                        ),
@@ -320,12 +321,13 @@ class _CompanyState extends State<Company> {
                                               ),
                                child: SvgPicture.asset('assets/images/vector2.svg',width: 10,height: 10,)),
                               SizedBox(width: 10,),
-                             Text(email,softWrap: true,overflow: TextOverflow.ellipsis,),
+                             Text(email,softWrap: true,overflow: TextOverflow.ellipsis,style: TextStyle(color: Theme.of(context).colorScheme.primary),),
                            ],
                          ),)]),
                        ),
                  SizedBox(height: 10,),
                   IconButton(
+                    color: Theme.of(context).colorScheme.primary,
             icon: const Icon(Icons.share),
             onPressed: () async {
               // Replace with your actual sharing logic

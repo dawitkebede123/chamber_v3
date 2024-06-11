@@ -55,9 +55,10 @@ class FAQ extends StatelessWidget {
 
       
       appBar: AppBar(
-        backgroundColor:Colors.white,
+        backgroundColor:Theme.of(context).colorScheme.background,
         
          leading: IconButton(
+          color: Theme.of(context).colorScheme.primary,
           icon: Icon(Icons.arrow_back),
           onPressed:()=>{
            Navigator.push(
@@ -74,10 +75,10 @@ class FAQ extends StatelessWidget {
       borderRadius: BorderRadius.circular(30.0), // Set border radius
     ),
        
-        title:const Text(
+        title: Text(
           'Addis Chamber',
           style: TextStyle(
-           color: Colors.black,
+           color: Theme.of(context).colorScheme.primary,
            fontWeight: FontWeight.bold,
            fontSize: 18,
           ),
