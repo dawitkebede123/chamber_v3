@@ -18,6 +18,8 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:chamber_of_commerce/widgets/VideoPlayer.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:mime/mime.dart';
+import 'package:http/http.dart' as http;
 
 
 class CompanyDescription extends StatefulWidget {
@@ -70,15 +72,15 @@ class _CompanyDescriptionState extends State<CompanyDescription> {
  Future<String> storeVideoInFirebase(String fileName) async {
   try {
     final storage  = FirebaseStorage.instance.ref();
-       final images = storage.child('video');
-       final imageRef = images.child(fileName);
+       final video = storage.child('video');
+       final videoRef = video.child(fileName);
        	
 
 
 
-       final networkImageUrl = await imageRef.getDownloadURL();
+       final networkVideoUrl = await videoRef.getDownloadURL();
       //  print(networkImageUrl);
-    return networkImageUrl;
+    return networkVideoUrl;
   } on FirebaseException catch (e) {
     // Handle potential errors
     print('Error storing image: ${e.code} - ${e.message}');
@@ -204,10 +206,19 @@ class _CompanyDescriptionState extends State<CompanyDescription> {
           FutureBuilder<String>(
             future: videoUrlFuture,
             builder: (context, snapshot) {
-              if (snapshot.hasData && snapshot.data!.toLowerCase().endsWith('.gif')) {
+              // print(snapshot.data);
+              // print(getVideoType(snapshot.data!));
+              String? videoType;
+              Future<String?> type = getVideoType(snapshot.data!);
+              type.then((value) => videoType = value);
+              print(snapshot.data!);
+              print(videoType);
+              if (snapshot.hasData && videoType=='mp4') {
+                  print('video');
                 // Display video
                 return VideoPlayerWidget(videoUrl: snapshot.data!);
               } else {
+                print('gif');
                 return  Container(
             //  width:MediaQuery.of(context).size.width * 0.20,
            child: FutureBuilder<String>(
@@ -281,16 +292,17 @@ class _CompanyDescriptionState extends State<CompanyDescription> {
         ),
         ),
        SizedBox(height: 20,),
-        if(profile !='')
+        if(profile !="")
          Container(
                     width: 200,
 
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20,right: 20,bottom: 24),
                       child: Container(child: Text(profile,textAlign: TextAlign.justify,style: TextStyle(fontSize: 14))),
-                    )),
+           )
+           ),
                 
-                         if(tel !="")
+         if(tel !="")
                        Padding(
                          padding: const EdgeInsets.only(left: 20.0,right: 20),
                          child: 
@@ -402,4 +414,18 @@ class _CompanyDescriptionState extends State<CompanyDescription> {
     return scaffold;
     
   }
+
+  Future<String?> getVideoType(String url) async {
+  final response = await http.get(Uri.parse(url));
+  if (response.statusCode == 200) {
+    final contentType = response.headers['content-type'];
+    if (contentType != null) {
+      final mimeType = lookupMimeType(contentType);
+      if (mimeType != null && mimeType.startsWith('video/')) {
+        return mimeType.split('/').last; // Extract video type (e.g., mp4)
+      }
+    }
+  }
+  return null; // Error or non-video content
+}
 }

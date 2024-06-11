@@ -1,5 +1,6 @@
 import 'package:chamber_of_commerce/pages/user/Company%20_business.dart';
 import 'package:chamber_of_commerce/pages/user/Company.dart';
+import 'package:chamber_of_commerce/widgets/CompanyDescription.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,7 +41,7 @@ class _Business_Top_ListState extends State<Business_Top_List> {
        data = snapshot.snapshot.value as List<dynamic>;
       //  print(snapshot.snapshot.value);
       //  print(data);
-      //  data = data.where((element) => element["Is_adv"]=="True").toList();
+       data = data.where((element) => element["Is_adv"]=="True").toList();
       // Define a map for filtering logic by index
       filteredBusinesses = data;
 
@@ -233,7 +234,7 @@ for (final element in filteredBusinesses) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => CompanyBusiness(detail: businessData)),
+                      builder: (context) => CompanyDescription(detail: businessData)),
                 );
               },
               child: Padding(
@@ -291,7 +292,7 @@ for (final element in filteredBusinesses) {
       final imageRef = images.child(fileName);
 
       final networkImageUrl = await imageRef.getDownloadURL();
-      print(networkImageUrl);
+      // print(networkImageUrl);
       return networkImageUrl;
     } on FirebaseException catch (e) {
       // Handle potential errors

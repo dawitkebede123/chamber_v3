@@ -62,7 +62,7 @@ class CompanyState extends State<CompanyDetail> {
        
         title: Text(
           name,
-          style: TextStyle(
+          style: const TextStyle(
            color: Colors.black,
            fontWeight: FontWeight.bold,
            fontSize: 18,
@@ -208,7 +208,7 @@ class CompanyState extends State<CompanyDetail> {
          
       )),
         
-         bottomNavigationBar:const CustomeButtomNavBar(index: 3,),
+         bottomNavigationBar:const CustomeButtomNavBar(index: 2,),
   
         // BottomAppBar(),
     

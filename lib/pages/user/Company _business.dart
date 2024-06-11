@@ -38,18 +38,19 @@ class _CompanyBusinessState extends State<CompanyBusiness> {
   // };
   @override
   Widget build(BuildContext context) {
-    String sector = widget.detail["sector"].toString();
-    String  name =widget.detail["name"].toString();
+    String sector = widget.detail["Sector"].toString();
+    String  name =widget.detail["Account Name"].toString();
     String logo = widget.detail["logo"].toString();
-    String  profile = widget.detail["profile"].toString();
-    String image = widget.detail["adv_image"].toString();
-    String video = widget.detail["adv_video"].toString();
-    String tel = widget.detail["tel"].toString();
-    String email = widget.detail["email"].toString();
-    String website = widget.detail["website"].toString();
-    String fax = widget.detail["fax"].toString();
+    // String  profile = widget.detail["Profile"].toString();
+    String image = widget.detail["Image"].toString();
+    String video = widget.detail["Video"].toString();
+    String tel = widget.detail["Tel"].toString();
+    String email = widget.detail["E-mail"].toString();
+    String website = widget.detail["Web"].toString();
+    // String fax = widget.detail["fax"].toString();
 
      Future<String> imageUrlFuture = storeImageInFirebase(image);
+     Future<String> logoUrlFuture = storeLogoInFirebase(logo);
 
   
     var scaffold = Scaffold(
@@ -81,7 +82,7 @@ class _CompanyBusinessState extends State<CompanyBusiness> {
        
         title: Text(
           sector,
-          style: TextStyle(
+          style: const TextStyle(
            color: Colors.black,
            fontWeight: FontWeight.bold,
            fontSize: 18,
@@ -114,7 +115,7 @@ class _CompanyBusinessState extends State<CompanyBusiness> {
                          //      ),
              decoration: BoxDecoration(
                         border: Border.all(
-           color: Color.fromARGB(255,229,234,232), // Set border color
+           color: const Color.fromARGB(255,229,234,232), // Set border color
            width: 1.0,
                         ),
            borderRadius:BorderRadius.circular(20), // Set border width
@@ -128,7 +129,7 @@ class _CompanyBusinessState extends State<CompanyBusiness> {
                            Container(
              width:MediaQuery.of(context).size.width * 0.20,
            child: FutureBuilder<String>(
-    future: imageUrlFuture,
+    future: logoUrlFuture,
     builder: (context, snapshot) {
       if (snapshot.hasData) {
         return Image.network(snapshot.data!); // Use the downloaded URL
@@ -191,14 +192,14 @@ class _CompanyBusinessState extends State<CompanyBusiness> {
 
           ),
         ),
-        if(profile!="")
-         Container(
-                    width: 200,
+        // if(profile!="")
+        //  Container(
+        //             width: 200,
 
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20,right: 20,bottom: 24),
-                      child: Container(child: Text(profile,textAlign: TextAlign.justify,style: TextStyle(fontSize: 14))),
-                    )),
+        //             child: Padding(
+        //               padding: const EdgeInsets.only(left: 20,right: 20,bottom: 24),
+        //               child: Container(child: Text(profile,textAlign: TextAlign.justify,style: TextStyle(fontSize: 14))),
+        //             )),
                 
                  Row(
                  children: [
@@ -262,25 +263,25 @@ class _CompanyBusinessState extends State<CompanyBusiness> {
                  ],
                 ),
                  SizedBox(height: 10,),
-                Row(
-                 children: [
-                  Padding(padding:const EdgeInsets.only(left: 12.0,right: 12.0),
-                  child: 
-                  SvgPicture.asset('assets/images/fax_icon.svg',width: 20,height: 20,)
+                // Row(
+                //  children: [
+                //   Padding(padding:const EdgeInsets.only(left: 12.0,right: 12.0),
+                //   child: 
+                //   SvgPicture.asset('assets/images/fax_icon.svg',width: 20,height: 20,)
                   
-                   ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                       Text("Fax ",style: TextStyle(fontSize: 10)),
-                       Text(fax,style: TextStyle(fontSize: 10))
+                //    ),
+                //     Column(
+                //       crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //        Text("Fax ",style: TextStyle(fontSize: 10)),
+                //        Text(fax,style: TextStyle(fontSize: 10))
                       
-                    ]
+                //     ]
                          
-                   )
+                //    )
                    
-                 ],
-                ),
+                //  ],
+                // ),
                  SizedBox(height: 10,),
                   Row(
                     children: [
@@ -289,7 +290,7 @@ class _CompanyBusinessState extends State<CompanyBusiness> {
                                   icon: const Icon(Icons.share),
                                   onPressed: () async {
                                     // Replace with your actual sharing logic
-                                    final text = 'CompanyBusiness Name: $name\n Phone: $tel\n Email: $email\n Website: $website\n Fax: $fax\n';
+                                    final text = 'CompanyBusiness Name: $name\n Phone: $tel\n Email: $email\n Website: $website\n';
                                     await Share.share(text);
                                   },
                                 ),
@@ -310,7 +311,27 @@ class _CompanyBusinessState extends State<CompanyBusiness> {
   Future<String> storeImageInFirebase(String fileName) async {
   try {
     final storage  = FirebaseStorage.instance.ref();
-       final images = storage.child('media');
+       final images = storage.child('image');
+       final imageRef = images.child(fileName);
+       	
+
+
+
+       final networkImageUrl = await imageRef.getDownloadURL();
+       print(networkImageUrl);
+    return networkImageUrl;
+  } on FirebaseException catch (e) {
+    // Handle potential errors
+    print('Error storing image: ${e.code} - ${e.message}');
+    return ''; // Or throw an exception for further handling
+  }
+}
+
+
+ Future<String> storeLogoInFirebase(String fileName) async {
+  try {
+    final storage  = FirebaseStorage.instance.ref();
+       final images = storage.child('logo');
        final imageRef = images.child(fileName);
        	
 
