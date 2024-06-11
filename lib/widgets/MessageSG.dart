@@ -68,7 +68,17 @@ class MessageSg extends StatelessWidget {
          Padding(
            padding: const EdgeInsets.only(left: 20.0,right: 20,top: 4),
            child: ListView(children: [
-            Image.asset('assets/sg.jpg'),
+            Container(
+              height: 300,
+              width: 300,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(30.0),
+              image: const DecorationImage(
+                  image: AssetImage('assets/sg.jpg'), // Replace with your image path
+                    fit: BoxFit.cover, // Adjust image fit as needed
+    ),
+               ),
+              // child: Image.asset('assets/sg.jpg', fit: BoxFit.cover,)
+              ),
              SizedBox(height: 20,),
             Text('Message from the CEO: Celebrating Success in Our Business Directory',style: TextStyle(color: Theme.of(context).colorScheme.primary,),),
             SizedBox(height: 10,),

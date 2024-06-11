@@ -103,6 +103,7 @@ class _CompanyDescriptionState extends State<CompanyDescription> {
     final website = widget.detail["Web"];
     final sector = widget.detail["Sector"];
     final sub_sector = widget.detail["Sub-Sector"];
+    final category = widget.detail["Category"];
     // String fax = widget.detail["fax"].toString();
      Future<String> imageUrlFuture = storeImageInFirebase(image);
      Future<String> imageUrlFutureGif = storeVideoInFirebase(video);

@@ -15,7 +15,9 @@ import 'package:chamber_of_commerce/widgets/VideoPlayer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CompanyDetail extends StatefulWidget {
+      // int index= 2;
   final Map<dynamic, dynamic> data;
+
     const CompanyDetail({super.key, required this.data});
  
   @override
@@ -24,7 +26,6 @@ class CompanyDetail extends StatefulWidget {
 
 class CompanyState extends State<CompanyDetail> {
     
-
   @override
   Widget build(BuildContext context) {
     // final accountNumber = widget.data['Account Number'];
@@ -35,7 +36,8 @@ class CompanyState extends State<CompanyDetail> {
     final email = widget.data['E-mail'];
     final website = widget.data['Web'];
     final isAdv = widget.data['Is_adv'] == "True";
-  
+    final category = widget.data['Category'];
+    
     var scaffold = Scaffold(
     
        
@@ -208,7 +210,7 @@ class CompanyState extends State<CompanyDetail> {
          
       )),
         
-         bottomNavigationBar:const CustomeButtomNavBar(index: 2,),
+        //  bottomNavigationBar:const CustomeButtomNavBar(index: ,),
   
         // BottomAppBar(),
     

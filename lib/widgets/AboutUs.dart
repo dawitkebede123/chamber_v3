@@ -2,11 +2,13 @@ import 'package:chamber_of_commerce/pages/user/Home.dart';
 import 'package:chamber_of_commerce/widgets/CustomBottomNavBar.dart';
 import 'package:chamber_of_commerce/widgets/FAQ.dart';
 import 'package:chamber_of_commerce/widgets/GridScreen.dart';
+import 'package:chamber_of_commerce/widgets/LeftMenu.dart';
 import 'package:chamber_of_commerce/widgets/MessagePresident.dart';
 import 'package:chamber_of_commerce/widgets/MessageSG.dart';
 import 'package:chamber_of_commerce/widgets/expandedPanel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class About extends StatelessWidget {
   const About({super.key});
@@ -47,7 +49,7 @@ class About extends StatelessWidget {
               ),
       },
          backgroundColor: Color.fromARGB(255, 255, 241, 209),
-         child: Text("FAQ"),
+         child: Text("FAQ",style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),),),
          ),
       appBar: AppBar(
         backgroundColor:Theme.of(context).colorScheme.background,
@@ -60,7 +62,7 @@ class About extends StatelessWidget {
                 context,
                  TransparentRoute(
                
-                page:  Home(),
+                page:  LeftMenu(),
               ),
               ),
             }
@@ -103,8 +105,11 @@ class About extends StatelessWidget {
            ),
           
             Text(style: TextStyle(color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.justify, "Established in 1947, AACCSA is a voluntary, non-governmental, business membership organization with more than 17,000 member companies. The chamber serves as a credible voice of business and advocates for the creation of a conducive business environment. It also promotes trade and industry, disseminating business information, consulting government and members on economic development and business issues, establishing friendly relationship with similar chambers in other countries, and exchanging information as well as engaging in arbitration in times of disputes among businesses."),
-             TextButton(onPressed: ()=>{
-          Navigator.push(
+              SizedBox(height: 20,),
+            ElevatedButton(
+  onPressed: () {
+    // Handle button press event here
+    Navigator.push(
                 context,
                  TransparentRoute(
                
@@ -112,16 +117,36 @@ class About extends StatelessWidget {
                 
                 // , image: "assets/sg.jpg")
               ),
-              ),
-            }, child: Text("Message From Secretary General")),
-           TextButton(onPressed: ()=>{
-          Navigator.push(
+              );
+  },
+   style: ElevatedButton.styleFrom(
+    backgroundColor: Colors.blue, // Set the background color
+    textStyle: const TextStyle(color: Colors.white), // Adjust text color for contrast
+  ),
+  child:  Text('Message From Secretary General', style: TextStyle(color:Theme.of(context).colorScheme.primary),),
+),
+ 
+
+    ElevatedButton(
+     
+  onPressed: () {
+    // Handle button press event here
+    Navigator.push(
                 context,
                  TransparentRoute(
                
                 page:  MessagePresident()
               ),
-          )}, child: Text("Message From President")),
+          );
+  },
+  style: ElevatedButton.styleFrom(
+    backgroundColor: Colors.blue, // Set the background color
+    textStyle: const TextStyle(color: Colors.white), // Adjust text color for contrast
+  ),
+  child: Text('Message From President', style: TextStyle(color:Theme.of(context).colorScheme.primary),),
+),        
+
+         
             Column(
               children: [
                 Padding(

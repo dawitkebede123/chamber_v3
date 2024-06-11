@@ -118,9 +118,14 @@ class Almanac extends StatelessWidget {
                 ),
                },
          backgroundColor: Color.fromARGB(255, 255, 241, 209),
-           child: Padding(
-             padding: const EdgeInsets.all(15.0),
-             child:  Text("Usefull Address",style: TextStyle(color: Theme.of(context).colorScheme.primary,),),
+           child: const Padding(
+             padding: EdgeInsets.all(10.0),
+             child:  Column(
+               children: [
+                 Text("Usefull",style: TextStyle(color: Color.fromARGB(255, 0, 114, 63)),),
+                 Text("Address",style: TextStyle(color: Color.fromARGB(255, 0, 114, 63),),),
+               ],
+             ),
            ),
                ),
        ),

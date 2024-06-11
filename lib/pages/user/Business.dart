@@ -49,38 +49,42 @@ class _BusinessState extends State<Business> {
         "assets/images/business_lists/11.svg",
         "assets/images/business_lists/6.svg",
         "assets/images/business_lists/13.svg",
-
-        "assets/images/business_lists/1.svg",
+          "assets/images/business_lists/14.svg",
+         "assets/images/business_lists/9.svg",
+          "assets/images/business_lists/1.svg",
+           "assets/images/business_lists/7.svg",
+             "assets/images/business_lists/10.svg",
         //  "assets/images/business_lists/2.svg",
-        "assets/images/business_lists/3.svg",
-        "assets/images/business_lists/4.svg",
-        
-        "assets/images/business_lists/7.svg",
        
-        "assets/images/business_lists/9.svg",
-        "assets/images/business_lists/10.svg",
+        "assets/images/business_lists/4.svg",
         "assets/images/business_lists/12.svg",
-        "assets/images/business_lists/14.svg",
+       
+    
+       "assets/images/business_lists/3.svg",
+        
+        
+        
   ];
   List <String> title = [
     "Export",
     "Import",
     "Manufacturing",
    "Construction",
-   "Transport, Storage And Communication",
-
-   "Agriculture, Hunting, Forestry, And Fishing",
+   "Transport",
+    "Business Service",
+   "Wholesale",
+   "Agriculture",
   //  "Financial Inter Mediation And Insurance",
-   "Community, Social And Personal Services",
-   "Electricity, Gas And Water Supply",
-   
-   "Hotel And Restaurants",
+    "Hotel And Restaurants",
+    "Maintenance",
+   "Electricity",
+   "Mining",
   
-   "Wholesale And Retail ",
-   "Maintenance",
+  
+   "Community And Services",
    
-   "Mining And Quarrying",
-   "Real Estate And Business Service"
+   
+   
   ];
  final slideImages = [
    "assets/images/business_lists/adv_logo/1.jpg",
@@ -212,9 +216,14 @@ class _BusinessState extends State<Business> {
                 ),
                },
          backgroundColor: Color.fromARGB(255, 255, 241, 209),
-           child: Padding(
-             padding: const EdgeInsets.all(10.0),
-             child:  Text("Usefull Address",style: TextStyle(color: Theme.of(context).colorScheme.primary),),
+           child: const Padding(
+             padding: EdgeInsets.all(10.0),
+             child:  Column(
+               children: [
+                 Text("Usefull",style: TextStyle(color: Color.fromARGB(255, 0, 114, 63)),),
+                 Text("Address",style: TextStyle(color: Color.fromARGB(255, 0, 114, 63)),),
+               ],
+             ),
            ),
                ),
        ),
@@ -419,7 +428,7 @@ class _BusinessState extends State<Business> {
                                      Navigator.push(
                                   context,
                                   TransparentRoute(
-                                    page:Agriculture_Home()
+                                    page:Real_Estate_Home()
               ),
                                 );
                                    }   
@@ -427,7 +436,7 @@ class _BusinessState extends State<Business> {
                                      Navigator.push(
                                   context,
                                   TransparentRoute(
-                                    page:Community_Home()
+                                    page:Wholesale_Home()
               ),
                                 );
                                    }   
@@ -435,7 +444,7 @@ class _BusinessState extends State<Business> {
                                      Navigator.push(
                                   context,
                                   TransparentRoute(
-                                    page:Electricity_Home()
+                                    page:Agriculture_Home()
               ),
                                 );
                                    }  
@@ -451,7 +460,7 @@ class _BusinessState extends State<Business> {
                                      Navigator.push(
                                   context,
                                   TransparentRoute(
-                                    page:Wholesale_Home()
+                                    page:Maintenance_Home()
               ),
                                 );
                                    } 
@@ -467,7 +476,7 @@ class _BusinessState extends State<Business> {
                                      Navigator.push(
                                   context,
                                   TransparentRoute(
-                                    page:Mining_Home()
+                                    page:Electricity_Home()
               ),
                                 );
                                    }  
@@ -475,7 +484,7 @@ class _BusinessState extends State<Business> {
                                      Navigator.push(
                                   context,
                                   TransparentRoute(
-                                    page:Real_Estate_Home()
+                                    page:Mining_Home()
               ),
                                 );
                                    }     
