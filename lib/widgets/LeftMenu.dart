@@ -5,6 +5,7 @@ import 'package:chamber_of_commerce/theme/theme_provider.dart';
 import 'package:chamber_of_commerce/widgets/AboutUs.dart';
 import 'package:chamber_of_commerce/widgets/CountryProfile.dart';
 import 'package:chamber_of_commerce/widgets/CustomBottomNavBar.dart';
+import 'package:chamber_of_commerce/widgets/expandedPanel.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,22 @@ class _LeftMenuState extends State<LeftMenu> {
 
   @override
   Widget build(BuildContext context) {
+  final List<Map<String,dynamic>> contact =[
+       {
+      "title":"For Business Related Enquiry",
+    "content": "0115519817 \n 0911376543 \n addischamber@gmail.com"
+
+
+     },
+   
+    {
+      "title":"For Financial Almanac Related Enquiry",
+    "content": "   +251 11 515 5221 \n +251 91 196 4500 \n  +251 93 155 9829 \n flijalem@yahoo.com \n lemlem.aaccsa@gmail.com"
+    },
+    
+
+  ];
+
     return Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,
              appBar: AppBar(
@@ -171,6 +188,17 @@ class _LeftMenuState extends State<LeftMenu> {
                     )),
                 
               ),
+            ),
+
+             Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: SizedBox(
+                    height: 300,
+                    child: ExpandedPanel(data: contact)),
+                ),
+              ],
             ),
       ],
     ),  

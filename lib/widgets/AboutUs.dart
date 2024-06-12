@@ -15,21 +15,7 @@ class About extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String,dynamic>> contact =[
-       {
-      "title":"For Business Related Enquiry",
-    "content": "0115519817 \n 0911376543 \n addischamber@gmail.com"
-
-
-     },
-   
-    {
-      "title":"For Financial Almanac Related Enquiry",
-    "content": "   +251 11 515 5221 \n +251 91 196 4500 \n  +251 93 155 9829 \n flijalem@yahoo.com \n lemlem.aaccsa@gmail.com"
-    },
-    
-
-  ];
+  
      var scaffold = Scaffold(
       //  drawer:const BackButton(
       //   //  backgroundColor: Colors.white,
@@ -147,16 +133,7 @@ class About extends StatelessWidget {
 ),        
 
          
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: SizedBox(
-                    height: 300,
-                    child: ExpandedPanel(data: contact)),
-                ),
-              ],
-            ),
+           
           ]),
         )
          
