@@ -33,11 +33,22 @@ class Agriculture_listing extends StatefulWidget {
   @override
   State<Agriculture_listing> createState() => _Agriculture_listingState();
 }
+List<dynamic> filteredBusinesses = [];
+List<dynamic> get newfilteredBusinesses=> filteredBusinesses
+      .where((item) => item['Account Name'].toLowerCase().startsWith(_query))
+      .toList();
+  // List<dynamic> filteredBusinesses=[];
+   String  _query = '';
 
 class _Agriculture_listingState extends State<Agriculture_listing> {
-   String _query = '';
+  
+  
+  
+  
    Stream<DatabaseEvent>? _userStream;
   // final Map data = widget.businessCompanyProfile[""];
+
+
    
   @override
   void initState() {
@@ -96,7 +107,7 @@ class _Agriculture_listingState extends State<Agriculture_listing> {
 
       appBar: AppBar(
         // Padding: const EdgeInsets.only(left: 20.0, top: 15.0, right: 10.0, bottom: 5.0),
-        backgroundColor:Color.fromARGB(255, 255, 255, 255),
+        backgroundColor:const Color.fromARGB(255, 255, 255, 255),
       
          leading: Row(
            children: [
@@ -164,6 +175,11 @@ class _Agriculture_listingState extends State<Agriculture_listing> {
                onChanged: (value) {
                                             setState(() {
                                               _query = value.toLowerCase();
+  //                                           filteredBusinesses = filteredBusinesses.expand((business) {
+  //       final companyName = business['Account Name']?.toString() ?? '';
+  //   return companyName.startsWith(value) ? [business] : [];
+  // }).toList();
+    
                                             });},
                     maxLines: 1,
                     // controller: _searchController,
@@ -247,7 +263,7 @@ class _Agriculture_listingState extends State<Agriculture_listing> {
     return companyName.startsWith("AGRICULTURE, HUNTING, FORESTRY, AND FISHING") ? [element] : [];
   }).toList();
   // print(data);
-  List<dynamic> filteredBusinesses = data;
+ filteredBusinesses = data;
   if (data.isEmpty) {
     return const Center(child: Text('No businesses found'));
   }
@@ -312,12 +328,12 @@ for (var i = 0; i < items.length; i++) {
     
     
       // physics: NeverScrollableScrollPhysics(),
-     
+     //the search field to be search on filteredBusinesses
      
        ListView.builder(
-       itemCount: filteredBusinesses.length,
+       itemCount: newfilteredBusinesses.length,
        itemBuilder: (context, index) {
-         final businessData = filteredBusinesses[index];
+         final businessData = newfilteredBusinesses[index];
          final name = businessData['Account Name'];
          final email = businessData['E-mail'];
          final tel = businessData['Tel'];

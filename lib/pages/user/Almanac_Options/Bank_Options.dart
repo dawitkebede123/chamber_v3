@@ -128,7 +128,7 @@ class BankOptions extends StatelessWidget {
     {
       "sector":"Bank",
      "name": "Amhara Bank ",
-     "logo": "assets/images/almanac_lists/bank_logos/13.jpg",
+     "logo": "assets/images/almanac_lists/bank_logos/13.png",
      "adv_image":"assets/images/almanac_lists/adv/22.jpg",
      "adv_video":"",
      "profile": "The throng of shareholders makes Amhara Bank the most powerful and prominent bank in Ethiopia as it was established by more than 138 thousand subscribers with 4.8 billion ETB paid-up and 6.5 billion ETB subscribed capital. Currently, the bank’s paid-up capital has reached 6.5 billion ETB.",

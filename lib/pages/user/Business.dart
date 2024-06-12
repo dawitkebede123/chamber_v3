@@ -468,7 +468,7 @@ class _BusinessState extends State<Business> {
                                      Navigator.push(
                                   context,
                                   TransparentRoute(
-                                    page:Maintenance_Home()
+                                    page:Electricity_Home()
               ),
                                 );
                                    }  
@@ -476,7 +476,7 @@ class _BusinessState extends State<Business> {
                                      Navigator.push(
                                   context,
                                   TransparentRoute(
-                                    page:Electricity_Home()
+                                    page:Mining_Home()
               ),
                                 );
                                    }  
@@ -484,7 +484,7 @@ class _BusinessState extends State<Business> {
                                      Navigator.push(
                                   context,
                                   TransparentRoute(
-                                    page:Mining_Home()
+                                    page:Community_Home()
               ),
                                 );
                                    }     

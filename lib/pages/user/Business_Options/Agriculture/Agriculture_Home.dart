@@ -234,7 +234,7 @@ class _Agriculture_HomeState extends State<Agriculture_Home> {
             borderSide: BorderSide.none,
           ),
           // contentPadding: EdgeInsets.all(1),
-          hintText: 'Search Business',
+          hintText: 'Search Agriculture',
           // suffixIcon: widget.filter? _buildSuffixIcon():null,
         ),
       ),
@@ -278,7 +278,7 @@ class _Agriculture_HomeState extends State<Agriculture_Home> {
                                        ),
                                      ),
                                      Text(_filteredItems[index],
-                                      style: TextStyle(fontSize: 12,),
+                                      style: const TextStyle(fontSize: 12,),
                                       textAlign: TextAlign.center,
                                      maxLines: 2,
                     overflow: TextOverflow.ellipsis,)

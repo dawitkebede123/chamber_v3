@@ -110,39 +110,39 @@ class _CompanyDescriptionState extends State<CompanyDescription> {
      Future<String> logoUrlFuture = storeLogoInFirebase(logo);
     Future<String> videoUrlFuture = storeVideoInFirebase(video);
     var scaffold = Scaffold(
-      appBar: AppBar(
-              backgroundColor: Theme.of(context).colorScheme.background,
-              leading: IconButton(
-          color: Theme.of(context).colorScheme.primary,
-          icon: const Icon(Icons.arrow_back),
-          onPressed:()=>{
-         Navigator.pop(context)
-            }
-          ),
+    //   appBar: AppBar(
+    //           backgroundColor: Theme.of(context).colorScheme.background,
+    //           leading: IconButton(
+    //       color: Theme.of(context).colorScheme.primary,
+    //       icon: const Icon(Icons.arrow_back),
+    //       onPressed:()=>{
+    //      Navigator.pop(context)
+    //         }
+    //       ),
       
-        // padding: const EdgeInsets.all(16.0), // Add padding on all sides
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(50.0), // Set border radius
-    ),
+    //     // padding: const EdgeInsets.all(16.0), // Add padding on all sides
+    // shape: RoundedRectangleBorder(
+    //   borderRadius: BorderRadius.circular(50.0), // Set border radius
+    // ),
        
-        title:Text(
-          name,
-          style: TextStyle(
-           color: Theme.of(context).colorScheme.primary,
-           fontWeight: FontWeight.bold,
-           fontSize: 18,
-          ),
-        ),
-       //should be replace by botton
-         actions: [
-          Padding(padding: EdgeInsets.only(right: 20),
-         child:  SvgPicture.asset('assets/images/chamber_icon.svg')
-          ,),
+    //     title:Text(
+    //       name,
+    //       style: TextStyle(
+    //        color: Theme.of(context).colorScheme.primary,
+    //        fontWeight: FontWeight.bold,
+    //        fontSize: 18,
+    //       ),
+    //     ),
+    //    //should be replace by botton
+    //      actions: [
+    //       Padding(padding: EdgeInsets.only(right: 20),
+    //      child:  SvgPicture.asset('assets/images/chamber_icon.svg')
+    //       ,),
          
-    ],
-        elevation: 0.0,//remove shadow
-        centerTitle: true,
-      ),
+    // ],
+    //     elevation: 0.0,//remove shadow
+    //     centerTitle: true,
+    //   ),
       
        
 

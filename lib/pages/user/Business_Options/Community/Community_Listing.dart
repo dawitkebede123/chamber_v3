@@ -2,7 +2,6 @@
 import 'package:chamber_of_commerce/main.dart';
 import 'package:chamber_of_commerce/pages/user/Business.dart';
 import 'package:chamber_of_commerce/pages/user/Business_Options/Agriculture/Agriculture_Home.dart';
-import 'package:chamber_of_commerce/pages/user/Business_Options/Community/Community_Home.dart';
 import 'package:chamber_of_commerce/pages/user/Business_Options/Export/Export_Home.dart';
 import 'package:chamber_of_commerce/pages/user/Company%20_business.dart';
 import 'package:chamber_of_commerce/pages/user/Company.dart';
@@ -25,18 +24,31 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
-class Community_listing extends StatefulWidget {
+class Community_Listing extends StatefulWidget {
+  
   final int index;
   final String title;
   final List<Map<String, String>> businessCompanyProfile ;
-  const Community_listing({super.key,required this.index,required this.title,required this.businessCompanyProfile});
+  const Community_Listing({super.key,required this.index,required this.title,required this.businessCompanyProfile});
   @override
-  State<Community_listing> createState() => _Community_listingState();
+  State<Community_Listing> createState() => _Community_ListingState();
 }
+List<dynamic> filteredBusinesses = [];
+List<dynamic> get newfilteredBusinesses=> filteredBusinesses
+      .where((item) => item['Account Name'].toLowerCase().startsWith(_query))
+      .toList();
+  // List<dynamic> filteredBusinesses=[];
+   String  _query = '';
 
-class _Community_listingState extends State<Community_listing> {
+class _Community_ListingState extends State<Community_Listing> {
+  
+  
+  
+  
    Stream<DatabaseEvent>? _userStream;
   // final Map data = widget.businessCompanyProfile[""];
+
+
    
   @override
   void initState() {
@@ -60,12 +72,14 @@ class _Community_listingState extends State<Community_listing> {
   //     // _searchTerm = searchTerm.toLowerCase();
   //   });
   // }
+  
   @override
   Widget build(BuildContext context) {
     //sample data containing company name, log(if there is no logo give a default one
     // ),
   //  
     //  final data
+   String title = widget.title;
     
      final  _items = [
      'assets/images/business_lists/sample/1.svg',
@@ -76,7 +90,6 @@ class _Community_listingState extends State<Community_listing> {
      'assets/images/business_lists/sample/6.svg',
     //  'assets/images/business_lists/sample/mengesha.svg',
     //  'assets/images/business_lists/sample/tomoca.svg',
-
 
    
 
@@ -94,7 +107,7 @@ class _Community_listingState extends State<Community_listing> {
 
       appBar: AppBar(
         // Padding: const EdgeInsets.only(left: 20.0, top: 15.0, right: 10.0, bottom: 5.0),
-        backgroundColor:Color.fromARGB(255, 255, 255, 255),
+        backgroundColor:const Color.fromARGB(255, 255, 255, 255),
       
          leading: Row(
            children: [
@@ -107,7 +120,7 @@ class _Community_listingState extends State<Community_listing> {
                       context,
                        TransparentRoute(
                
-                page:  Community_Home(),
+                page:  Agriculture_Home(),
               ),
                     ),
                     }
@@ -154,31 +167,66 @@ class _Community_listingState extends State<Community_listing> {
     ListView(
         children: [
           
-       
-              StreamBuilder<DatabaseEvent>(builder:  (context, snapshot) {
-                       return Column(
-                         children: [
-                  //          const SizedBox(
-                  // height: 400,
-                  // child: Business_Top_List()),
-                          // const Padding(
-                          //   padding: EdgeInsets.only(left: 20.0,right: 20, bottom: 10),
-                          //   child: SearchFieldBusiness(),
-                          // ),
+                   Container(
+                        // height: 48,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20,right: 20,bottom: 16),
+            child: TextField(
+               onChanged: (value) {
+                                            setState(() {
+                                              _query = value.toLowerCase();
+  //                                           filteredBusinesses = filteredBusinesses.expand((business) {
+  //       final companyName = business['Account Name']?.toString() ?? '';
+  //   return companyName.startsWith(value) ? [business] : [];
+  // }).toList();
+    
+                                            });},
+                    maxLines: 1,
+                    // controller: _searchController,
+                    decoration: InputDecoration(
+            contentPadding: const EdgeInsets.only(left: 20.0),
+            filled: true,
+            fillColor: Color.fromARGB(255, 229, 234, 232),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(50),
+              borderSide: BorderSide.none,
+            ),
+            // contentPadding: EdgeInsets.all(1),
+            hintText: 'Search $title',
+            // suffixIcon: widget.filter? _buildSuffixIcon():null,
+                    ),
+                  ),
+          ),
+                        
+                     
+                      ),
+      
+              Expanded(
+                child: StreamBuilder<DatabaseEvent>(builder:  (context, snapshot) {
+                         return Column(
+                           children: [
+                    //          const SizedBox(
+                    // height: 400,
+                    // child: Business_Top_List()),
+                            // const Padding(
+                            //   padding: EdgeInsets.only(left: 20.0,right: 20, bottom: 10),
+                            //   child: SearchFieldBusiness(),
+                            // ),
+                             
                            
-                         
-                           
-                           
-                           
-                                                            Container(
-                                                                                                         // Set desired height or adjust with constraints
-                                                                                                           height: MediaQuery.of(context).size.height * 0.81, // Adjust height as needed
-                                                                                                         // color: Color.fromARGB(255, 142, 139, 139), // Optional background color
-                                                                                                         child: _buildContent(snapshot), // Call a separate function
-                                                                                                       ),
-                         ],
-                       );
-                    }, stream: _userStream,)
+                             
+                             
+                             
+                                  Container(
+                                    // Set desired height or adjust with constraints
+                                      height: MediaQuery.of(context).size.height * 0.81, // Adjust height as needed
+                                   // color: Color.fromARGB(255, 142, 139, 139), // Optional background color
+                                   child: _buildContent(snapshot), // Call a separate function
+                                 ),
+                           ],
+                         );
+                      }, stream: _userStream,),
+              )
 
 
         ],
@@ -194,6 +242,7 @@ class _Community_listingState extends State<Community_listing> {
   ///
   ///
   ///
+  
   
     Widget _buildContent(AsyncSnapshot<DatabaseEvent> snapshot) {
     //  print(snapshot.data!.snapshot.value as List<dynamic>);
@@ -214,12 +263,12 @@ class _Community_listingState extends State<Community_listing> {
     return companyName.startsWith("COMMUNITY, SOCIAL AND PERSONAL SERVICES") ? [element] : [];
   }).toList();
   // print(data);
-  List<dynamic> filteredBusinesses = data;
+ filteredBusinesses = data;
   if (data.isEmpty) {
     return const Center(child: Text('No businesses found'));
   }
   //based on the index categorize SIT+A1:I15802C Description
-  const items = [
+const items = [
   'ACTIVITIES OF PROFESSIONAL ORGANIZATIONS',
   'ACTIVITIES OF SPORTS,BODY ENRICHMENT SPORTS AND OTHER ENTERTAINTMENT AND RELATED ACTIVITIES',
   'ARTS FESTIVAL( MUSIC,FILM, THEATRE,GALLERY AND OTHER)',
@@ -304,7 +353,9 @@ for (var i = 0; i < items.length; i++) {
     // print(data);
     filteredBusinesses = filteredBusinesses.expand((element) {
       // ... filtering logic using entry.value as Map<String, dynamic>
-      final company = element['SIT+A1:I15802C Description']?.toString() ?? '';
+
+      final company = element['SIT+A1:I15802C Description']?.toString().toUpperCase() ?? '';
+        
       return company.startsWith("${currentItem}") ? [element] : [];
     }).toList();
   // print(i);
@@ -328,12 +379,12 @@ for (var i = 0; i < items.length; i++) {
     
     
       // physics: NeverScrollableScrollPhysics(),
-     
+     //the search field to be search on filteredBusinesses
      
        ListView.builder(
-       itemCount: filteredBusinesses.length,
+       itemCount: newfilteredBusinesses.length,
        itemBuilder: (context, index) {
-         final businessData = filteredBusinesses[index];
+         final businessData = newfilteredBusinesses[index];
          final name = businessData['Account Name'];
          final email = businessData['E-mail'];
          final tel = businessData['Tel'];
@@ -383,7 +434,7 @@ for (var i = 0; i < items.length; i++) {
                          // Column(children: [
                          //   SvgPicture.asset('assets/images/phone_icon.svg'),
                          //   SizedBox(height: 10,),
-                         // //  SvgPicture.asset('assets/images/fax_icon.svg')
+                         // //  SvgPicture.asset('assets/images/mobile_icon.svg')
                             
                          // ],),
                          // SizedBox(width: 20,),
@@ -515,7 +566,7 @@ for (var i = 0; i < items.length; i++) {
                              icon: const Icon(Icons.share),
                              onPressed: () async {
                                // Replace with your actual sharing logic
-                               final text = 'Company Name: $name\n Phone: $tel\n Email: $email\n Website: $website\n Fax: $mobile\n';
+                               final text = 'Company Name: $name\n Phone: $tel\n Email: $email\n Website: $website\n mobile: $mobile\n';
                                await Share.share(text);
                              },
                                       ),
@@ -16750,65 +16801,6 @@ for (var i = 0; i < items.length; i++) {
 
 
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

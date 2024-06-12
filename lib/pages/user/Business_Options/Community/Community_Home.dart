@@ -340,7 +340,7 @@ class _Community_HomeState extends State<Community_Home> {
                                           Navigator.push(
                                     context,
                                     TransparentRoute(
-                        page:  Community_listing(index: index,title:title[index],businessCompanyProfile: businessCompanyProfile),
+                        page:  Community_Listing(index: index,title:title[index],businessCompanyProfile: businessCompanyProfile),
                               ),
                                   );
                                      }                 
